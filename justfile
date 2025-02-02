@@ -1,2 +1,2 @@
-run:
-	uv run python -m app
+run ARGS:
+	uv run python -m app {{ ARGS }}
