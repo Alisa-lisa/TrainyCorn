@@ -9,6 +9,8 @@ import soundfile as sf
 from pydub import AudioSegment
 from pydub.playback import play
 import os
+import time
+
 
 app = typer.Typer()
 
@@ -17,8 +19,8 @@ MOVES: List[str] = ["jab", "cross", "hook", "uppercut", "side kick", "front kick
 MAX_REPETITION: int = 10
 MIN_MOVES: int = 3
 MAX_MOVES: int = 3
-VOICE: str = "./data/voice/bruce_lee_voice.ogg"
 kokoro = kokoro.KPipeline(lang_code='a')
+
 
 @app.command()
 def combo(moves: Optional[int] = 3) -> str:
@@ -33,6 +35,7 @@ def combo(moves: Optional[int] = 3) -> str:
     print(res)
     return res
 
+
 @app.command()
 def pronounce(moves: Optional[int] = 3):
     """ Suggest a combo in a voice, hardcoded voice of Bruce Lee. """
@@ -43,8 +46,9 @@ def pronounce(moves: Optional[int] = 3):
         sf.write(output_sound, audio, 24000)
     audio = AudioSegment.from_file(output_sound)
     play(audio)
+    time.sleep(2)
+    play(audio)
     os.remove(output_sound)
-
 
 
 if __name__ == "__main__":
