@@ -23,4 +23,5 @@ simple tool to track kickboxing training and get immediate feedback
 
 
 ## TODO:
-
+- Time intervals
+- Images for every move

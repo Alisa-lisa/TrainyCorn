@@ -2,7 +2,7 @@
 Create simple combination of 3-5 movements on demand
 """
 import typer
-from typing import Optional, List
+from typing import Optional, List, Tuple
 import random
 import kokoro
 import soundfile as sf
@@ -10,43 +10,37 @@ from pydub import AudioSegment
 from pydub.playback import play
 import os
 import time
-
+import json
 
 app = typer.Typer()
 
 
-MOVES: List[str] = ["jab", "cross", "hook", "uppercut", "side kick", "front kick", "roundhouse kick", "dive"]
-MAX_REPETITION: int = 10
-MIN_MOVES: int = 3
-MAX_MOVES: int = 3
+MOVES: dict = json.load(open("./data/moves.json", "r"))
+MAX_DURATION: int = 30
+MAX_DURATION: int = 60*2
+REST: int = 60 * 1
 kokoro = kokoro.KPipeline(lang_code='a')
 
 
 @app.command()
-def combo(moves: Optional[int] = 3) -> str:
-    """ Randomly combines moves into a combo to execute and how many times. Max 10. Moves are statically provided in json file for now. """
-    result_combo: List[str] = []
-    # attempt 1: random number of moves + random with return choice
-    moves: int = random.randint(MIN_MOVES, MAX_MOVES)
-    repetition: int = random.randint(1, MAX_REPETITION)
-    for i in range(0, moves):
-        result_combo.append(random.choice(MOVES))
-    res: str = f"Do {', '.join(result_combo)}. {repetition} times!"
-    print(res)
-    return res
+def combos() -> Tuple[str, int, int]:
+    """ Chooses base combos to execute, repeat for X sec """
+    result_combo: str = random.choice(list(MOVES.keys()))
+    duration: int = random.randint(MAX_DURATION, MAX_DURATION)
+    print(result_combo)
+    return result_combo, duration, REST
 
 
 @app.command()
-def pronounce(moves: Optional[int] = 3):
+def pronounce():
     """ Suggest a combo in a voice, hardcoded voice of Bruce Lee. """
-    text = combo(moves)
+    combination, duration, rest = combos()
+    text = f"Execute {combination} for {duration} seconds. Rest afterwards for {rest} seconds."
     output_sound = "./data/output.ogg"
     command_sound = kokoro(text, voice='af_alloy', speed=1)
     for i, (gs, ps, audio) in enumerate(command_sound):
         sf.write(output_sound, audio, 24000)
     audio = AudioSegment.from_file(output_sound)
-    play(audio)
-    time.sleep(2)
     play(audio)
     os.remove(output_sound)
 

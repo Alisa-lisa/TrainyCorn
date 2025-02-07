@@ -1,3 +1,56 @@
 {
-	
+	"Jab, Jab, Straight Right": {
+		"description": "",
+		"explanation": "",
+		"video_id": "",
+		"tags": ["lvl1", "upper"]
+	},
+	"Jab, Straight Right, Left hook": {
+		"description": "",
+		"explanation": "",
+		"video_id": "",
+		"tags": ["lvl1", "upper"]
+	},
+	"Jab, Left Hook, Straight right": {
+		"description": "",
+		"explanation": "",
+		"video_id": "",
+		"tags": ["lvl1", "upper"]
+	},
+	"Straight right, Left hook, Straight right": {
+		"description": "",
+		"explanation": "",
+		"video_id": "",
+		"tags": ["lvl1", "upper"]
+	},
+	"Jab, Straight right, Left Uppercut": {
+		"description": "",
+		"explanation": "",
+		"video_id": "",
+		"tags": ["lvl1", "upper"]
+	},
+	"Straight right, Left Uppercut, Straight right": {
+		"description": "",
+		"explanation": "",
+		"video_id": "",
+		"tags": ["lvl1", "upper"]
+	},
+	"Jab, Jab, Straight right body": {
+		"description": "",
+		"explanation": "",
+		"video_id": "",
+		"tags": ["lvl1", "upper"]
+	},
+	"Left front kick, Jab, Straight right, Roundhouse right": {
+		"description": "",
+		"explanation": "",
+		"video_id": "",
+		"tags": ["lvl1", "mixed"]
+	},
+	"Left front kick, Jab, Straight right, Right front kick": {
+		"description": "",
+		"explanation": "",
+		"video_id": "",
+		"tags": ["lvl1", "mixed"]
+	}
 }
